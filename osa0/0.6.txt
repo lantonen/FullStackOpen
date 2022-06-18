@@ -1,0 +1,14 @@
+käyttäjä->selain: Painaa save-nappia
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over palvelin:
+palvelin suorittaa new_note_spa pyyntöön
+liittyvää backend-koodia
+end note
+
+palvelin-->selain:  Response Headers HTTP-statuskoodi 201
+
+note over selain:
+selain lukee Headerin sisältämän JSON muotoisen datan
+end note
+
