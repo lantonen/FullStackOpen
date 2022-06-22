@@ -7,21 +7,27 @@ const Statistics = ({good, neutral, bad}) => {
   else{
     return (
       <div>
-        <TextBox text = {"good"} amount = {good} ></TextBox>
-        <TextBox text = {"neutral"} amount = {neutral} ></TextBox>
-        <TextBox text = {"bad"} amount = {bad} ></TextBox>
-        <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
-        <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
-        <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
+        <StatisticLine text = {"good"} amount = {good} ></StatisticLine>
+        <StatisticLine text = {"neutral"} amount = {neutral} ></StatisticLine>
+        <StatisticLine text = {"bad"} amount = {bad} ></StatisticLine>
+        <StatisticLine text = {"all"} amount = {good + neutral + bad}></StatisticLine>
+        <StatisticLine text = {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></StatisticLine>
+        <StatisticLine text = {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></StatisticLine>
       </div>
     )
   }
   
 }
 
-const TextBox = ({text, amount}) => {
+const StatisticLine = ({text, amount}) => {
   return(
     <p>{text} {amount}</p>
+  )    
+}
+
+const Button = ({text, amount, callback}) => {
+  return(
+    <button onClick={() => callback(amount + 1)}> {text}</button>
   )    
 }
 
@@ -34,9 +40,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={() => setGood(good + 1)}> good</button>
-      <button onClick={() => setNeutral(neutral + 1)}> neutral</button>
-      <button onClick={() => setBad(bad + 1)}> bad</button>
+        <Button text={"good"} amount={good} callback={setGood}></Button>
+        <Button text={"neutral"} amount={neutral} callback={setNeutral}></Button>
+        <Button text={"bad"} amount={bad} callback={setBad}></Button>
       <h2>statistics</h2>
       <div>
         <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
