@@ -1,14 +1,19 @@
 import { useState } from 'react'
 
 const Statistics = ({good, neutral, bad}) => {
-  return (
-    <div>
-      <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
-      <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
-      <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
-    </div>
-    
+
+    return (
+      <div>
+        <TextBox text = {"good"} amount = {good} ></TextBox>
+        <TextBox text = {"neutral"} amount = {neutral} ></TextBox>
+        <TextBox text = {"bad"} amount = {bad} ></TextBox>
+        <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
+        <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
+        <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
+      </div>
   )
+  
+  
 }
 
 const TextBox = ({text, amount}) => {
@@ -31,9 +36,6 @@ const App = () => {
       <button onClick={() => setBad(bad + 1)}> bad</button>
       <h2>statistics</h2>
       <div>
-        <TextBox text = {"good"} amount = {good} ></TextBox>
-        <TextBox text = {"neutral"} amount = {neutral} ></TextBox>
-        <TextBox text = {"bad"} amount = {bad} ></TextBox>
         <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
       </div>
     
