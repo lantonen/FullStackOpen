@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
 const Statistics = ({good, neutral, bad}) => {
-
+  if(good === 0 && neutral === 0 && bad ===0 ){
+    return <p> No feedback given </p>
+  }
+  else{
     return (
       <div>
         <TextBox text = {"good"} amount = {good} ></TextBox>
@@ -11,8 +14,8 @@ const Statistics = ({good, neutral, bad}) => {
         <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
         <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
       </div>
-  )
-  
+    )
+  }
   
 }
 
