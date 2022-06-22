@@ -23,6 +23,9 @@ const App = () => {
         <TextBox text = {"good"} amount = {good} ></TextBox>
         <TextBox text = {"neutral"} amount = {neutral} ></TextBox>
         <TextBox text = {"bad"} amount = {bad} ></TextBox>
+        <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
+        <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
+        <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
       </div>
     
 
