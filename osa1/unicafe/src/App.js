@@ -1,16 +1,27 @@
 import { useState } from 'react'
 
+const Statistics = ({good, neutral, bad}) => {
+  return (
+    <div>
+      <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
+      <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
+      <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
+    </div>
+    
+  )
+}
+
+const TextBox = ({text, amount}) => {
+  return(
+    <p>{text} {amount}</p>
+  )    
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-
-  const TextBox = ({text, amount}) => {
-    return(
-      <p>{text} {amount}</p>
-    )    
-  }
 
   return (
     <div>
@@ -23,9 +34,7 @@ const App = () => {
         <TextBox text = {"good"} amount = {good} ></TextBox>
         <TextBox text = {"neutral"} amount = {neutral} ></TextBox>
         <TextBox text = {"bad"} amount = {bad} ></TextBox>
-        <TextBox text= {"all"} amount = {good + neutral + bad}></TextBox>
-        <TextBox text= {"average"} amount = {(good * 1 + bad * (-1)) / (good + neutral + bad) }></TextBox>
-        <TextBox text= {"positive"} amount = { `${good / (good + neutral + bad) * 100} %` }></TextBox>
+        <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
       </div>
     
 
