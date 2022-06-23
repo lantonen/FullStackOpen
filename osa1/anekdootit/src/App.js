@@ -11,9 +11,17 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
   ]
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(new Uint8Array(anecdotes.length))
 
   function randomNumber (max) {
     return Math.floor(Math.random() * max)
+  }
+
+  function vote (number) {
+    const copy = [...points]
+    // kasvatetaan taulukon paikan number arvoa yhdellä
+    copy[number] += 1 
+    setPoints(copy)
   }
 
   return (
@@ -23,6 +31,8 @@ const App = () => {
         </div>
 
         <div>
+          <p>has {points[selected]} votes</p>
+          <button onClick={() => {vote(selected)}}>vote</button>
           <button onClick={() => {setSelected(randomNumber(anecdotes.length))}}>next anecdote</button>
         </div>
       
