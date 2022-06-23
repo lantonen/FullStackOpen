@@ -1,5 +1,17 @@
 import { useState } from 'react'
 
+const Anecdote = ({header, anecdote, points}) => {
+  return (
+    <div>
+        <h1>{header}</h1>
+        <div>
+          {anecdote}
+        </div>
+        <p>has {points} votes</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -13,28 +25,47 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(new Uint8Array(anecdotes.length))
 
-  function randomNumber (max) {
-    return Math.floor(Math.random() * max)
+  function randomNumber(max){
+    var number = Math.floor(Math.random() * max)
+    if(number === selected){
+      return randomNumber(max)
+    }
+    return number
   }
 
-  function vote (number) {
+  function vote(number){
     const copy = [...points]
     // kasvatetaan taulukon paikan number arvoa yhdellä
     copy[number] += 1 
     setPoints(copy)
   }
 
+  function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+
+    var max = arr[0];
+    var maxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+
+    return maxIndex;
+}
+
   return (
     <div>
+        <Anecdote header={"Anecdote of the day"} anecdote={anecdotes[selected]} points={points[selected]}></Anecdote>
         <div>
-          {anecdotes[selected]}
-        </div>
-
-        <div>
-          <p>has {points[selected]} votes</p>
           <button onClick={() => {vote(selected)}}>vote</button>
           <button onClick={() => {setSelected(randomNumber(anecdotes.length))}}>next anecdote</button>
         </div>
+        <Anecdote header={"Anecdote with most votes"} anecdote={anecdotes[indexOfMax(points)]} points={points[indexOfMax(points)]}></Anecdote>
       
     </div>
   )
