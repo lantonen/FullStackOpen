@@ -40,6 +40,7 @@ const App = () => {
     setPoints(copy)
   }
 
+  //function for finding index for most poinst anecdote
   function indexOfMax(arr) {
     if (arr.length === 0) {
         return -1;
