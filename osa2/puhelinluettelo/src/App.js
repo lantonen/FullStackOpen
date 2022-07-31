@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState } from 'react'
 import React from 'react'
 
 const Person = ({person}) => {
@@ -6,6 +6,39 @@ const Person = ({person}) => {
     <div>{person.name} : {person.number}</div>
   )
 }
+const ListOfPersons = ({persons}) => {
+  return (
+    <div>
+      {persons.map(person => 
+      <Person key={person.name} person={person} />
+      )}
+    </div>
+  )
+}
+// Ongelmaksi osoittautui onChange käyttö esim filtterin kohdalla
+const Section = ({header, component : Comp}) => {
+  return (
+    <div>
+      <h2>{header}</h2>
+      <Comp></Comp>
+    </div>
+  )
+}
+const Filter = ({handler}) => {
+  return (
+    <div>filter shown with <input onChange={handler}></input></div>
+  )
+  }
+
+const PersonForm = ({addPerson, newName, handlePersonChange, newNumber, handleNumberChange}) => {
+  return (
+    <form onSubmit={addPerson}>
+      <div>name: <input value={newName} onChange={handlePersonChange}/></div>
+      <div>number: <input value={newNumber} onChange={handleNumberChange}/></div>
+      <div><button type="submit">add</button></div>
+    </form>
+  )
+  }
 
 
 const App = () => {
@@ -58,21 +91,10 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>filter shown with <input onChange={handleSearch}></input></div>
+      <Filter handler={handleSearch}></Filter>
       <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>name: <input value={newName} onChange={handlePersonChange}/></div>
-        <div>number: <input value={newNumber} onChange={handleNumberChange}/></div>
-        <div><button type="submit">add</button></div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        {personsToShow.map(person => 
-          <Person key={person.name} person={person} />
-        )}
-      </div>
-      
-
+      <PersonForm addPerson={addPerson} newName={newName} handlePersonChange={handlePersonChange} newNumber={newNumber} handleNumberChange={handleNumberChange}></PersonForm>
+      <Section header={"Numbers"} component={() => {return <ListOfPersons persons={personsToShow}></ListOfPersons>}}></Section>
     </div>
   )
 
