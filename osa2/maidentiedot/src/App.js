@@ -36,7 +36,7 @@ const Country = ({ object }) => {
       <div>area: {object.area}</div>
       <h2>languages:</h2>
       {Object.values(object.languages).map(language =>
-        <div>{language}</div>
+        <div key={language} >&bull; {language}</div>
       )}
       <img src={object.flags.png} alt={"flag"}></img>
     </div>
